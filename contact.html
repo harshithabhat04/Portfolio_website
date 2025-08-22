@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contact - Harshitha</title>
+
+  <!-- AOS CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <nav>
+    <ul class="navbar">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="projects.html">Projects</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- Contact Section -->
+  <section class="contact-section" data-aos="fade-up">
+    <h2>Get In Touch</h2>
+    <form class="contact-form" onsubmit="return handleSubmit(event)">
+      <label>Name</label>
+      <input type="text" placeholder="Your Name" required />
+
+      <label>Email</label>
+      <input type="email" placeholder="Your Email" required />
+
+      <label>Subject</label>
+      <input type="text" placeholder="Subject" />
+
+      <label>Message</label>
+      <textarea placeholder="Your Message" rows="5" required></textarea>
+
+      <button type="submit">Send Message</button>
+    </form>
+
+    <p id="notification" class="hidden">✅ Your message has been sent!</p>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="social-icons">
+      <a href="mailto:harshithabhat100@gmail.com" title="Email"><i class="fas fa-envelope"></i></a>
+      <a href="https://github.com/harshithabhat04" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+      <a href="https://linkedin.com/in/k-harshitha-bhat-236a022b3" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+    </div>
+  </footer>
+
+  <!-- AOS Script -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>AOS.init();</script>
+  <script>
+
+    function handleSubmit(e) {
+      e.preventDefault();
+      document.getElementById("notification").classList.remove("hidden");
+      e.target.reset();
+      setTimeout(() => {
+        document.getElementById("notification").classList.add("hidden");
+      }, 3000);
+      return false;
+    }
+  </script>
+</body>
+</html>

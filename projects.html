@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Projects - Harshitha</title>
+
+  
+  <!-- AOS CSS -->
+<link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <nav>
+    <ul class="navbar">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="projects.html">Projects</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+
+<section id="project-section">
+  <h2 data-aos="zoom-in">Projects</h2>
+
+  <!-- Existing + New Projects will be shown here -->
+  <div id="project-list" data-aos="fade-up">
+    <!-- JavaScript will auto-load all saved + default projects here -->
+  </div>
+
+  <!-- Project Input Form -->
+  <div id="project-form" style="display: none; margin-top: 20px;"data-aos="fade-right">
+    <input type="text" id="project-title" placeholder="Project Title" required>
+    <textarea id="project-desc" placeholder="Project Description" rows="5" required></textarea>
+    <input type="url" id="project-link" placeholder="GitHub Link">
+    <button onclick="addProject()" class="submit-btn">Add Project</button>
+  </div>
+
+  <!-- Add New Project Button at Bottom -->
+  <button onclick="toggleForm()" class="add-btn" data-aos="fade-left">+ Add New Project</button>
+</section>
+
+<!-- JavaScript -->
+<script>
+  // Load saved + default projects
+  window.onload = function () {
+    const savedProjects = JSON.parse(localStorage.getItem("projects")) || [];
+
+    // If it's first load and nothing saved, insert your defaults
+    if (savedProjects.length === 0) {
+      const defaultProjects = [
+        { title: "E-Commerce Application", desc: "Built a a Full-Stack E-Commerce web application built using the MERN stack (MongoDB, Express.js, React.js, and Node.js).It's a minimal yet scalable app designed for a smooth shopping experence.",link:"https://github.com/harshithabhat04/E-Commerce_app "},
+        
+      ];
+      localStorage.setItem("projects", JSON.stringify(defaultProjects));
+      defaultProjects.forEach(project => displayProject(project.title, project.desc,project.link));
+    } else {
+      savedProjects.forEach(project => displayProject(project.title, project.desc,project.link));
+    }
+  };
+
+  function toggleForm() {
+    const form = document.getElementById("project-form");
+    form.style.display = form.style.display === "none" ? "block" : "none";
+  }
+
+  function addProject() {
+    const title = document.getElementById("project-title").value.trim();
+    const desc = document.getElementById("project-desc").value.trim();
+    const link = document.getElementById("project-link").value.trim();
+
+
+    if (title && desc) {
+      const project = { title, desc,link};
+      const existing = JSON.parse(localStorage.getItem("projects")) || [];
+      existing.push(project);
+      localStorage.setItem("projects", JSON.stringify(existing));
+
+      displayProject(title, desc,link);
+
+      document.getElementById("project-title").value = '';
+      document.getElementById("project-desc").value = '';
+      document.getElementById("project-link").value = '';
+    } else {
+      alert("Please enter both title and description.");
+    }
+  }
+
+  function displayProject(title, desc, link = "") {
+  const projectList = document.getElementById("project-list");
+  const newCard = document.createElement("div");
+  newCard.className = "project";
+  newCard.innerHTML = `
+    <h3>${title}</h3>
+    <p>${desc}</p>
+    ${link ? `<a href="${link}" target="_blank" class="project-link"> View Project</a>` : ""}
+  `;
+  projectList.appendChild(newCard);
+}
+
+</script>
+<!-- AOS JS -->
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+  AOS.init();
+</script>
+
+
+</body>
+</html>
