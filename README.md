@@ -47,7 +47,3 @@ start index.html
 
 
 
----
-
-Let me know if you want this customized further for hosting instructions (GitHub Pages), or want a version in plain `.txt` or `.docx`.
-```
